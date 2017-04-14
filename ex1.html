@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web Components</title>
+    <script>
+        //customElements API & life cycle callback methods
+        class MyCustomElement extends HTMLElement {
+            constructor() {
+                super();
+                console.log('My Custom Element constructed!');
+            }
+            
+            //life cycle callback methods
+            connectedCallback() {
+                console.log("My custom element added to the DOM!");
+            }
+            static get observedAttributes() {
+                return ["demo"];
+            }
+            attributeChangedCallback(name, oldValue, newValue) {
+                console.log("Attribute changed ", name, oldValue, newValue);
+            }
+            disconnectedCallback() {
+                console.log("My custom element removed from DOM!");
+            }
+            
+        }
+        window.customElements.define('my-custom-element', MyCustomElement);
+    </script>
+</head>
+<body>
+    <script>
+        //create an instance of our custom element
+        let $ce = document.createElement("my-custom-element");
+        setTimeout(() => {
+            //add our custom element to the DOM
+            document.body.appendChild($ce);
+        }, 3000);
+    </script>
+</body>
+</html>

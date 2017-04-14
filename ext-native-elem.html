@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Extending Native Elements</title>
+
+    <!-- custom polyfill from webreflection -->
+    <script src="node_modules/document-register-element/build/document-register-element.js"></script>
+
+    <script>
+        //example of extending a native anchor element
+        class CustomAnchor extends HTMLAnchorElement {
+            connectedCallback() {
+                this.addEventListener("click", e => {
+                    e.preventDefault();
+                    const result = confirm("Are you sure?");
+                    if(result) {
+                        window.location.href = e.target.href;
+                    }
+                });
+            }
+        }
+        window.customElements.define("custom-anchor", CustomAnchor, {extends: "a"});
+    </script>
+</head>
+<body>
+    <!-- 'is'' attr specifies which custom elem to use -->
+    <a is="custom-anchor" href="http://www.google.com">Go to Google.com</a>
+</body>
+</html>

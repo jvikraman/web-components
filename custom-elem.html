@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Web Components</title>
+    <title>Custom Element Example</title>
     <script>
         //customElements API & life cycle callback methods
         class MyCustomElement extends HTMLElement {
@@ -28,6 +28,7 @@
             }
             
         }
+        //register the custom element to the window object
         window.customElements.define('my-custom-element', MyCustomElement);
     </script>
 </head>

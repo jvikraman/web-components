@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML Template Example</title>
+</head>
+<body>
+    <!-- the new html template tag that holds the structure/template -->
+    <template id="list-item">
+        <li>
+            <h1>A movie title.</h1>
+            <p>A movie plot.</p>
+        </li>
+    </template>
+
+    <!-- this ul will get populated with data using the above template -->
+    <ul id="movie-list"></ul>
+
+    <!-- logic to define the data & populate the ul using the template -->
+    <script>
+        const items = [
+            {
+                title: "Star Trek",
+                plot: "Adventures of Captain Kirk, Spock & Dr. Mcoy!"
+            },
+            {
+                title: "The Duel",
+                plot: "Spielberg's Car chase made in heaven."
+            },
+            {
+                title: "The Good Bad & Ugly",
+                plot: "Eastwood at his best!"
+            }
+        ];
+        const $template = document.getElementById("list-item");
+        const $list = document.getElementById("movie-list");
+        items.forEach((movie) => {
+            const $clone = document.importNode($template.content, true);
+            $clone.querySelector("h1").innerText = movie.title;
+            $clone.querySelector("p").innerText = movie.plot;
+            $list.appendChild($clone);
+        });
+    </script>
+</body>
+</html>
